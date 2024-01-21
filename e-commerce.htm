@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Console App</title>
+</head>
+<body>
+
+<script>
+  // Sample product data
+  const products = [
+    { id: 1, name: "bread", price: 20.99 },
+    { id: 2, name: "butter", price: 15.49 },
+    { id: 3, name: "lipton", price: 30.00 },
+  ];
+
+  // Shopping cart
+  const cart = [];
+
+  // Function to display available products
+  function displayProducts() {
+    console.log("\nAvailable Products:");
+    products.forEach(product => {
+      console.log(`${product.id}. ${product.name} - $${product.price.toFixed(2)}`);
+    });
+  }
+
+  // Function to add a product to the cart
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      cart.push(product);
+      console.log(`Added ${product.name} to the cart.`);
+    } else {
+      console.log("Invalid product ID.");
+    }
+  }
+
+  // Function to display the shopping cart
+  function displayCart() {
+    console.log("\nShopping Cart:");
+    cart.forEach(product => {
+      console.log(`${product.name} - $${product.price.toFixed(2)}`);
+    });
+  }
+
+  // Function to calculate and display the total price
+  function calculateTotal() {
+    const total = cart.reduce((acc, product) => acc + product.price, 0);
+    console.log(`Total: $${total.toFixed(2)}`);
+  }
+
+  // Main program loop
+  function main() {
+    while (true) {
+      console.log("\n1. Display Products");
+      console.log("2. Add to Cart");
+      console.log("3. Display Cart");
+      console.log("4. Checkout");
+      console.log("5. Exit");
+
+      const choice = prompt("Enter your choice:");
+
+      switch (parseInt(choice)) {
+        case 1:
+          displayProducts();
+          break;
+        case 2:
+          const productId = parseInt(prompt("Enter the product ID to add to the cart:"));
+          addToCart(productId);
+          break;
+        case 3:
+          displayCart();
+          calculateTotal();
+          break;
+        case 4:
+          console.log("Thank you for shopping with us!");
+          return;
+        case 5:
+          return;
+        default:
+          console.log("Invalid choice. Please try again.");
+      }
+    }
+  }
+
+  // Run the main program
+  main();
+</script>
+
+</body>
+</html>
